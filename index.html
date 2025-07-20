@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Film-Katalog</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>📽️ Mein Film-Katalog</h1>
+  
+  <button id="startScanner">🎯 Barcode scannen</button>
+  <div id="scanner" style="display:none;"></div>
+
+  <div id="result">
+    <h2>Letzter Scan:</h2>
+    <p id="codeOutput">Noch nichts gescannt.</p>
+  </div>
+
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <script src="script.js"></script>
+</body>
+</html>
