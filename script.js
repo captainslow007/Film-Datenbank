@@ -2,7 +2,7 @@ const startScannerBtn = document.getElementById('startScanner');
 const scannerDiv = document.getElementById('scanner');
 const codeOutput = document.getElementById('codeOutput');
 
-const apiKey = '4926b34f'; // <== Hier deinen echten API-Key eintragen
+const apiKey = 'http://www.omdbapi.com/?i=tt3896198&apikey=4926b34f'; // <== Hier deinen echten API-Key eintragen
 
 let html5QrcodeScanner;
 
