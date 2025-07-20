@@ -2,73 +2,76 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🎬 Mein Film-Katalog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scanner Test</title>
   <style>
     body {
       font-family: sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 20px;
       text-align: center;
+      padding: 20px;
+      background: #f4f4f4;
     }
-
-    h1 {
-      color: #333;
-    }
-
-    #startScanner {
-      padding: 10px 20px;
-      font-size: 18px;
-      margin: 20px auto;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    #startScanner:hover {
-      background-color: #0056b3;
-    }
-
     #scanner {
       margin: 20px auto;
       width: 300px;
       max-width: 100%;
-    }
-
-    #codeOutput {
-      margin-top: 15px;
-      font-size: 16px;
-    }
-
-    #movies {
-      margin-top: 30px;
-    }
-
-    img {
+      border: 1px solid #ccc;
       border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #007bff;
+      color: white;
+      border: none;
+    }
+    button:hover {
+      background: #0056b3;
     }
   </style>
 
-  <!-- Firebase SDKs -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-    import { getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+  <script src="https://unpkg.com/html5-qrcode" defer></script>
+</head>
+<body>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCcfDmj42JpXqUl2GMsEcYxTu4bYVIPKB4",
-      authDomain: "filmkatalog-d926d.firebaseapp.com",
-      projectId: "filmkatalog-d926d",
-      storageBucket: "filmkatalog-d926d.firebasestorage.app",
-      messagingSenderId: "135910725774",
-      appId: "1:135910725774:web:84546af4c38eb691c591df"
-    };
+  <h1>📷 Barcode Scanner Test</h1>
+  <button id="startBtn">Scanner starten</button>
+  <div id="scanner" style="display:none;"></div>
+  <div id="output">Noch nichts gescannt.</div>
 
-    initializeApp(firebaseConfig);
-    getFirestore();
+  <script>
+    let scanner;
+
+    document.getElementById('startBtn').addEventListener('click', () => {
+      const scannerDiv = document.getElementById('scanner');
+      scannerDiv.style.display = 'block';
+      if (!scanner) {
+        scanner = new Html5Qrcode("scanner");
+      }
+      scanner.start(
+        { facingMode: "environment" },
+        { fps: 10, qrbox: 250 },
+        (decodedText) => {
+          document.getElementById('output').textContent = 'Gescannt: ' + decodedText;
+          scanner.stop().then(() => {
+            scannerDiv.style.display = 'none';
+          });
+        },
+        (error) => {
+          // Fehler während des Scannens ignorieren oder hier anzeigen
+        }
+      ).catch(err => {
+        document.getElementById('output').textContent = 'Fehler beim Starten des Scanners: ' + err;
+      });
+    });
   </script>
 
-  <!-- html5-qrcode --
+</body>
+</html>
