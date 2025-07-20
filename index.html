@@ -2,22 +2,73 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Film-Katalog</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <h1>📽️ Mein Film-Katalog</h1>
-  
-  <button id="startScanner">🎯 Barcode scannen</button>
-  <div id="scanner" style="display:none;"></div>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎬 Mein Film-Katalog</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
 
-  <div id="result">
-    <h2>Letzter Scan:</h2>
-    <p id="codeOutput">Noch nichts gescannt.</p>
-  </div>
+    h1 {
+      color: #333;
+    }
 
-  <script src="https://unpkg.com/html5-qrcode"></script>
-  <script src="script.js"></script>
-</body>
-</html>
+    #startScanner {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 20px auto;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #startScanner:hover {
+      background-color: #0056b3;
+    }
+
+    #scanner {
+      margin: 20px auto;
+      width: 300px;
+      max-width: 100%;
+    }
+
+    #codeOutput {
+      margin-top: 15px;
+      font-size: 16px;
+    }
+
+    #movies {
+      margin-top: 30px;
+    }
+
+    img {
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+  </style>
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCcfDmj42JpXqUl2GMsEcYxTu4bYVIPKB4",
+      authDomain: "filmkatalog-d926d.firebaseapp.com",
+      projectId: "filmkatalog-d926d",
+      storageBucket: "filmkatalog-d926d.firebasestorage.app",
+      messagingSenderId: "135910725774",
+      appId: "1:135910725774:web:84546af4c38eb691c591df"
+    };
+
+    initializeApp(firebaseConfig);
+    getFirestore();
+  </script>
+
+  <!-- html5-qrcode --
